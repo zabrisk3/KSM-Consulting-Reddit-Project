@@ -1,15 +1,6 @@
-"""Star Wars themed posts can be found in different subreddits. This Python script
-performs linear classification. It reads in reddit bodies from two subreddits, "movies" and "StarWars",
-and attempts to classify whether or not the body came from the "movies" subreddit or
-the "StarWars" subreddit based on the number of times words of certain categories appear in that body.
-The classification is done through Linear SVM. Linear SVM creates a linear classifier
-and assigns weights to each category; the larger the magnitude of the weight, the more significant
-the category is to classification. The main goal is to determine the most significant category
-in classifying these bodies. The output from this code will two data tables: a data table showing
-different Star Wars categories, and the number of times words from those categories appear in each body;
-and a smaller data table at the end, showing the weights obtained from Linear SVM, and an overall
-proportion that was correctly classified through Linear SVM. The categories will be ranked according
-to weight, starting with the weight of largest magnitude."""
+"""Star Wars-themed posts can be found in different subreddits. This Python script
+performs linear classification. It reads in reddit bodies from two subreddits where Star Wars-themed posts can occur, "movies" and "StarWars", and attempts to classify whether or not the reddit body came from the "movies" subreddit or the "StarWars" subreddit based on the number of times words of certain categories appear in that body. The classification is done through Linear SVM. Linear SVM creates a linear classifier and assigns weights to each category; the larger the magnitude of the weight, the 
+more significant the category is to classification. The main goal is to determine the most significant category in classifying these bodies. The output from this code will two data tables: a data table showing different Star Wars categories, and the number of times words from those categories appear in each body; and a smaller data table at the end, showing the weights obtained from Linear SVM, and an overall proportion that was correctly classified through Linear SVM. The categories will be ranked according to weight, starting with the weight of largest magnitude."""
 
 import numpy as np
 import pandas as pd
@@ -29,7 +20,7 @@ n=55000
 df = pd.read_sql('select "subreddit", "body" from May2015 where "subreddit" = "StarWars" or "subreddit"="movies" order by id limit '+ str(n),sql_connect)
 subreddit = pd.DataFrame(df['subreddit'])
 
-"""In case n rows were not imported, redefine n to be the length of the dataframe."""
+"""In case n rows were not imported, redefine n to be the length of the data frame."""
 
 n=len(df.index)
 
@@ -46,9 +37,9 @@ starwars_keywords=pd.DataFrame({'Main Characters': pd.Series(['luke skywalker','
                          })
 
 """The function below serves a dual purpose. First, it helps quickly
-define a new dataframe in respect to another dataframe and also gives it
-that dataframe's column names. Second, it help with reindexing
-dataframes later on."""
+define a new data frame in respect to another data frame and also gives it
+that data frame's column names. Second, it help with reindexing
+data frames later on."""
 
 def replace_column_name(m,dafr):
     new_df = pd.DataFrame(np.zeros((m,len(dafr.columns))))
@@ -57,7 +48,7 @@ def replace_column_name(m,dafr):
     new_df.rename(columns = dict(list(zip(old_names, new_names))), inplace=True)
     return new_df
 
-"""This will be the dataframe that holds information on how many times
+"""This will be the data frame that holds a tally of how many times
 a word from a certain category appeared in a reddit body. """
 
 starwars_count = replace_column_name(n,starwars_keywords)
@@ -72,7 +63,7 @@ for i in starwars_keywords.columns.values:
             starwars_count[i][y] += word_count
 
 """Unfortunately, most of the reddit bodies will not have any words from any categories.
-Since the focus is on Star Wars subject matter, delete all rows containing only zeroes from the starwars_count dataframe,and delete those same rows in the subreddit dataframe."""
+Since the focus is on Star Wars subject matter, delete all rows containing only zeroes from the starwars_count data frame,and delete those same rows in the subreddit data frame."""
 
 off_count = 0
 for k in range(n):
@@ -86,13 +77,13 @@ for k in range(n):
         off_count += 1
 
 """Having deleted rows, the indexing is currently a mess. To help out,
-this will create new dataframes of the same size as the old ones.
+this will create new data frames of the same size as the old ones.
 These have all zeroes. """
 
 new_starwars_count = replace_column_name(len(starwars_count.index),starwars_count)
 new_subreddit = replace_column_name(len(subreddit.index),subreddit)
 
-"""Define a new function to give the values from one dataframe to another."""
+"""Define a new function to give the values from one data frame to another."""
 
 def replace_values(df1,df2):
     for e,f in list(zip(df1.index,df2.index)):
@@ -100,13 +91,13 @@ def replace_values(df1,df2):
             df1[m][e]=df2[m][f]
     return df1
 
-"""Give new dataframes the values of the old ones."""
+"""Give new data frames the values of the old ones."""
 
 new_starwars_count = replace_values(new_starwars_count, starwars_count)
 new_subreddit = replace_values(new_subreddit, subreddit)
 
 """ Concatenate new_starwars_count and new_subreddit into a new
-dataframe and save it as an Excel file."""
+data frame and save it as an Excel file."""
 
 new_matrix=pd.concat([new_starwars_count,new_subreddit], axis=1)
 writer = pd.ExcelWriter('StarWarsColumnTally.xlsx', engine='xlsxwriter')
@@ -134,12 +125,12 @@ length = len(new_subreddit.index)
 training_cut_off = int(length/3)
 random_vector=np.arange(length)
 np.random.shuffle(random_vector)
-training_input=new_starwars_count.iloc[random_vector[0: training_cut_off-1]].as_matrix() #get first 10% for training
-testing_input=new_starwars_count.iloc[random_vector[training_cut_off: length-1]].as_matrix() #Use remaining 90% for testing
-training_classes = new_df.iloc[random_vector[0: training_cut_off-1]].as_matrix()# 25% Training classes
+training_input=new_starwars_count.iloc[random_vector[0: training_cut_off-1]].as_matrix()  
+testing_input=new_starwars_count.iloc[random_vector[training_cut_off: length-1]].as_matrix()  
+training_classes = new_df.iloc[random_vector[0: training_cut_off-1]].as_matrix()
 testing_classes	= new_df.iloc[random_vector[training_cut_off: length-1]].as_matrix() #
 
-"""Fit the training data, predict on testing data, and get accuracy."""
+"""Fit the training data, predict on testing data, and calculate accuracy."""
 
 clf.fit(training_input,training_classes)
 predictions = clf.predict(testing_input)
@@ -163,7 +154,7 @@ weight_indices=np.argsort(absolute_coefficient_vector)
 weight_indices=weight_indices[::-1]
 
 
-"""Create a new dataframe with columns, weights, and accuracy and
+"""Create a new data frame with columns, weights, and accuracy and
 save as an Excel file."""
 
 column_names=list(new_starwars_count.columns.values)
