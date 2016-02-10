@@ -109,7 +109,7 @@ new_subreddit = replace_values(new_subreddit, subreddit)
 dataframe and save it as an Excel file."""
 
 new_matrix=pd.concat([new_starwars_count,new_subreddit], axis=1)
-writer = pd.ExcelWriter('StarWars.xlsx', engine='xlsxwriter')
+writer = pd.ExcelWriter('StarWarsColumnTally.xlsx', engine='xlsxwriter')
 new_matrix.to_excel(writer)
 writer.save()
 print(new_matrix)
@@ -126,11 +126,10 @@ for i in new_subreddit.index:
 
 new_df = pd.DataFrame(new_subreddit['subreddit'].astype(int))
 
-"""Create a Classifier."""
+
+"""Implement SVM. Use a randomly chosen third of the data for training and the rest for testing."""
 
 clf = svm.SVC(kernel='linear')
-
-"""Use a randomly chosen third of the data for training and the rest for testing."""
 length = len(new_subreddit.index)
 training_cut_off = int(length/3)
 random_vector=np.arange(length)
