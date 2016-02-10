@@ -5,10 +5,9 @@ the "StarWars" subreddit based on the number of times words of certain categorie
 The classification is done through Linear SVM. Linear SVM creates a linear classifier
 and assigns weights to each category; the larger the magnitude of the weight, the more significant
 the category is to classification. The main goal is to determine the most significant category
-in classifying these bodies. The output from this code will be a data table showing different Star Wars
-categories, and the number of times words from those categories appear in each body; as well as
-a smaller data table at the end, showing the weights obtained from Linear SVM, and an overall
-proportion that was correctly classified through Linear SVM. """
+in classifying these bodies. The output from this code will two data tables: a data table showing different Star Wars categories, and the number of times words from those categories appear in each body; and a smaller data table at the end, showing the weights obtained from Linear SVM, and an overall
+proportion that was correctly classified through Linear SVM. The categories will be ranked according
+to weight, starting with the highest weight."""
 
 import numpy as np
 import pandas as pd
@@ -44,7 +43,7 @@ starwars_keywords=pd.DataFrame({'Main Characters': pd.Series(['luke skywalker','
                          'Cast and Crew': pd.Series(['mark hamill','harrison ford','carrie fisher','george lucas','alec guinness','john williams'])
                          })
 
-"""The function below serves a duel purpose. First, it helps quickly
+"""The function below serves a dual purpose. First, it helps quickly
 define a new dataframe in respect to another dataframe and also gives it
 that dataframe's column names. Second, it help with reindexing
 dataframes later on."""
@@ -71,7 +70,7 @@ for i in starwars_keywords.columns.values:
             starwars_count[i][y] += word_count
 
 """Unfortunately, most of the reddit bodies will not have any words from any categories.
-Since the focus is on the Star Wars franchise, delete all rows containing only zeroes from the starwars_count dataframe,and delete those same rows in the subreddit dataframe."""
+Since the focus is on Star Wars subject matter, delete all rows containing only zeroes from the starwars_count dataframe,and delete those same rows in the subreddit dataframe."""
 
 off_count = 0
 for k in range(n):
@@ -92,13 +91,14 @@ new_starwars_count = replace_column_name(len(starwars_count.index),starwars_coun
 new_subreddit = replace_column_name(len(subreddit.index),subreddit)
 
 """Define a new function to give the values from one dataframe to another."""
+
 def replace_values(df1,df2):
     for e,f in list(zip(df1.index,df2.index)):
         for m in df1.columns:
             df1[m][e]=df2[m][f]
     return df1
 
-"""Give new dataframes the values of our old ones."""
+"""Give new dataframes the values of the old ones."""
 
 new_starwars_count = replace_values(new_starwars_count, starwars_count)
 new_subreddit = replace_values(new_subreddit, subreddit)
@@ -121,6 +121,7 @@ for i in new_subreddit.index:
         new_subreddit['subreddit'][i] = 0
 
 """"SVM specifically wants the values of new_subreddit designated as integers."""
+
 new_df = pd.DataFrame(new_subreddit['subreddit'].astype(int))
 
 """Create a linear classifier."""
@@ -161,6 +162,7 @@ weight_indices=weight_indices[::-1]
 
 """Create a new dataframe with columns, weights, and accuracy and
 save as an Excel file."""
+
 column_names=list(new_starwars_count.columns.values)
 accuracy_array=[]
 accuracy_array.append(accuracy)
