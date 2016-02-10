@@ -1,6 +1,6 @@
 # KSM-Consulting-Reddit-Project
 
-"""Star Wars-themed posts can be found in different subreddits. This Python script
+Star Wars-themed posts can be found in different subreddits. This Python script
 performs linear classification. It reads in reddit bodies from two subreddits where Star Wars-themed 
 posts can occur, "movies" and "StarWars", and attempts to classify whether or not the reddit body came 
 from the "movies" subreddit or the "StarWars" subreddit based on the number of times words of certain categories 
