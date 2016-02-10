@@ -132,7 +132,7 @@ clf = svm.SVC(kernel='linear')
 
 """Use a randomly chosen third of the data for training and the rest for testing."""
 length = len(new_subreddit.index)
-training_cut_off =	int(length/3)
+training_cut_off = int(length/3)
 random_vector=np.arange(length)
 np.random.shuffle(random_vector)
 training_input=new_starwars_count.iloc[random_vector[0: training_cut_off-1]].as_matrix() #get first 10% for training
