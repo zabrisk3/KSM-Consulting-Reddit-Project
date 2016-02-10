@@ -68,8 +68,7 @@ for i in starwars_keywords.columns.values:
             starwars_count[i][y] += word_count
 
 """Unfortunately, most of the reddit bodies will not have any words from any categories.
-Since the focus is on the Star Wars franchise, delete all rows containing only zeroes from the starwars_count
-dataframe,and delete those same rows in the subreddit dataframe."""
+Since the focus is on the Star Wars franchise, delete all rows containing only zeroes from the starwars_count dataframe,and delete those same rows in the subreddit dataframe."""
 
 off_count = 0
 for k in range(n):
@@ -102,7 +101,7 @@ new_starwars_count = replace_values(new_starwars_count, starwars_count)
 new_subreddit = replace_values(new_subreddit, subreddit)
 
 """ Concatenate new_starwars_count and new_subreddit into a new
-matrix and save it as an Excel file."""
+dataframe and save it as an Excel file."""
 
 new_matrix=pd.concat([new_starwars_count,new_subreddit], axis=1)
 writer = pd.ExcelWriter('StarWars.xlsx', engine='xlsxwriter')
@@ -118,10 +117,10 @@ for i in new_subreddit.index:
     else:
         new_subreddit['subreddit'][i] = 0
 
-""""SVM specifically wants the values of new_subreddit designated as integers"""
+""""SVM specifically wants the values of new_subreddit designated as integers."""
 new_df = pd.DataFrame(new_subreddit['subreddit'].astype(int))
 
-"""Create a linear classifier"""
+"""Create a linear classifier."""
 clf = svm.SVC(kernel='linear')
 
 """Use a randomly chosen third of the data for training and the rest for testing."""
@@ -157,7 +156,7 @@ weight_indices=np.argsort(absolute_coefficient_vector)
 weight_indices=weight_indices[::-1]
 
 
-"""Create a new marix with columns, weights, and accuracy and
+"""Create a new matrix with columns, weights, and accuracy and
 save as an Excel file."""
 column_names=list(new_starwars_count.columns.values)
 accuracy_array=[]
