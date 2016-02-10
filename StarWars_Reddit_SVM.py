@@ -72,8 +72,8 @@ for i in starwars_keywords.columns.values:
             starwars_count[i][y] += word_count
 
 """Unfortunately, most of the reddit bodies will not have any words from any categories.
-Since the focus is on Star Wars subject matter, delete all rows containing only zeroes from the 
-starwars_count data frame,and delete those same rows in the subreddit data frame."""
+Delete all rows containing only zeroes from the starwars_count data frame,and delete those 
+same rows in the subreddit data frame."""
 
 off_count = 0
 for k in range(n):
