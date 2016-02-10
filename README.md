@@ -3,9 +3,9 @@
 Star Wars-themed posts can be found in different subreddits. This Python script
 performs linear classification. It reads in reddit bodies from two subreddits where Star Wars-themed 
 posts can occur, "movies" and "StarWars", and attempts to classify whether or not the reddit body came 
-from the "movies" subreddit or the "StarWars" subreddit based on the number of times words of certain categories 
-appear in that body. The classification is done through Linear SVM. Linear SVM creates a linear classifier and 
-assigns weights to each category; the larger the magnitude of the weight, the more significant the category 
+from the "movies" subreddit or the "StarWars" subreddit based on the number of times words of certain Star Wars-themed
+categories appear in that body. The classification is done through Linear SVM. Linear SVM creates a linear classifier 
+and assigns weights to each category; the larger the magnitude of the weight, the more significant the category 
 is to classification. The main goal is to determine the most significant category in classifying these bodies. 
 
 The output from this code will two data tables: a data table showing different Star Wars categories, 
