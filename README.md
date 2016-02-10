@@ -10,6 +10,6 @@ the category is to classification. The main goal is to determine the most signif
 in classifying these reddit bodies. 
 
 The output from this code will two data tables: a data table showing different Star Wars categories, 
-and the number of times words from those categories appear in each body; and a smaller data table at the end, 
+and the number of times words from those categories appear in a reddit body; and a smaller data table at the end, 
 showing the weights obtained from Linear SVM, and an overall proportion that was correctly classified through Linear SVM. 
 The categories will be ranked according to weight, starting with the highest in magnitude.
