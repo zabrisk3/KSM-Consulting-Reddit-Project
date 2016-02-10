@@ -110,7 +110,7 @@ new_subreddit = replace_values(new_subreddit, subreddit)
 data frame and save it as an Excel file."""
 
 new_matrix=pd.concat([new_starwars_count,new_subreddit], axis=1)
-writer = pd.ExcelWriter('StarWarsColumnTally.xlsx', engine='xlsxwriter')
+writer = pd.ExcelWriter('StarWars_Column_Tally.xlsx', engine='xlsxwriter')
 new_matrix.to_excel(writer)
 writer.save()
 print(new_matrix)
@@ -181,7 +181,7 @@ final_weights=pd.DataFrame({'Category' : pd.Series([column_names[weight_indices[
                             'Overall Accuracy': pd.Series(accuracy_array)
                             })
 
-writer = pd.ExcelWriter('StarWarsWeightsandAccuracy.xlsx', engine='xlsxwriter')
+writer = pd.ExcelWriter('StarWars_Weights_and_Accuracy.xlsx', engine='xlsxwriter')
 final_weights.to_excel(writer)
 writer.save()
 print(final_weights)
