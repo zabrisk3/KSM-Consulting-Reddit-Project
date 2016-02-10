@@ -7,7 +7,7 @@ and assigns weights to each category; the larger the magnitude of the weight, th
 the category is to classification. The main goal is to determine the most significant category
 in classifying these bodies. The output from this code will two data tables: a data table showing different Star Wars categories, and the number of times words from those categories appear in each body; and a smaller data table at the end, showing the weights obtained from Linear SVM, and an overall
 proportion that was correctly classified through Linear SVM. The categories will be ranked according
-to weight, starting with the highest weight."""
+to weight, starting with the weight of largest magnitude."""
 
 import numpy as np
 import pandas as pd
@@ -124,7 +124,8 @@ for i in new_subreddit.index:
 
 new_df = pd.DataFrame(new_subreddit['subreddit'].astype(int))
 
-"""Create a linear classifier."""
+"""Create a Classifier."""
+
 clf = svm.SVC(kernel='linear')
 
 """Use a randomly chosen third of the data for training and the rest for testing."""
@@ -138,6 +139,7 @@ training_classes = new_df.iloc[random_vector[0: training_cut_off-1]].as_matrix()
 testing_classes	= new_df.iloc[random_vector[training_cut_off: length-1]].as_matrix() #
 
 """Fit the training data, predict on testing data, and get accuracy."""
+
 clf.fit(training_input,training_classes)
 predictions = clf.predict(testing_input)
 differences	= testing_classes-predictions
