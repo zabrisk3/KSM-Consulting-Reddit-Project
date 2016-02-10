@@ -8,18 +8,21 @@ the category is to classification. The main goal is to determine the most signif
 in classifying these bodies. The output from this code will be a data table showing different Star Wars
 categories, and the number of times words from those categories appear in each body; as well as
 a smaller data table at the end, showing the weights obtained from Linear SVM, and an overall
-proportion that was correctly classified through the SVM. """
+proportion that was correctly classified through Linear SVM. """
 
 import numpy as np
 import pandas as pd
 from sklearn import svm
 import sqlite3
+
+"""Note: this Python code was run through Kaggle's website."""
+
 sql_connect= sqlite3.connect('../input/database.sqlite')
 
 
 """Specify a desired number of rows to import and only import rows
 whose subreddit is either "StarWars" or "movies". Order by id.
-Note: 55000 rows will require this program to run for about 20 minutes."""
+Note: 55000 rows will require this program to run for about 20 minutes if run on Kaggle's website."""
 
 n=55000
 df = pd.read_sql('select "subreddit", "body" from May2015 where "subreddit" = "StarWars" or "subreddit"="movies" order by id limit '+ str(n),sql_connect)
@@ -156,7 +159,7 @@ weight_indices=np.argsort(absolute_coefficient_vector)
 weight_indices=weight_indices[::-1]
 
 
-"""Create a new matrix with columns, weights, and accuracy and
+"""Create a new dataframe with columns, weights, and accuracy and
 save as an Excel file."""
 column_names=list(new_starwars_count.columns.values)
 accuracy_array=[]
