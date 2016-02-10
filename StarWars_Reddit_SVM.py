@@ -32,7 +32,8 @@ subreddit = pd.DataFrame(df['subreddit'])
 
 n=len(df.index)
 
-"""Below are defined categories and keywords within those categories"""
+"""Below are defined categories and keywords within those categories that 
+this program will later search for."""
 
 starwars_keywords=pd.DataFrame({'Main Characters': pd.Series(['luke skywalker','obi-wan kenobi','han solo','chewbacca','darth vader','princess leia']),
                          'Planets': pd.Series(['tatooine','dagobah','hoth','coruscant','naboo','alderaan','cloud city','endor']),
@@ -46,7 +47,7 @@ starwars_keywords=pd.DataFrame({'Main Characters': pd.Series(['luke skywalker','
 
 """The function below serves a dual purpose. First, it helps quickly
 define a new data frame in respect to another data frame and also gives it
-that data frame's column names. Second, it help with reindexing
+that data frame's column names. Second, it helps with reindexing
 data frames later on."""
 
 def replace_column_name(m,dafr):
@@ -71,7 +72,8 @@ for i in starwars_keywords.columns.values:
             starwars_count[i][y] += word_count
 
 """Unfortunately, most of the reddit bodies will not have any words from any categories.
-Since the focus is on Star Wars subject matter, delete all rows containing only zeroes from the starwars_count data frame,and delete those same rows in the subreddit data frame."""
+Since the focus is on Star Wars subject matter, delete all rows containing only zeroes from the 
+starwars_count data frame,and delete those same rows in the subreddit data frame."""
 
 off_count = 0
 for k in range(n):
