@@ -15,4 +15,5 @@ The categories will be ranked according to weight, starting with the largest in 
 
 This code was run through Kaggle and takes about 20 minutes on that site. Based on 55000, it was found that the Cast and Crew
 Category was the most significant in classification (see StarWars_Weights_and_Accuracy). The accuracy of the classifier was 
-approximately 64%, which is better than what would be expected from randomly guessing. 
+approximately 64%, which is better than what would be expected from randomly guessing. Larger samples may lead to higher accuracy
+of the classifier. 
