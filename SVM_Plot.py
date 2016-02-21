@@ -30,7 +30,7 @@ training_cut_off = int(length/3)
 random_vector=np.arange(length)
 np.random.shuffle(random_vector)
 
-X = two_feature_dataframe.iloc[random_vector[0: training_cut_off-1]].as_matrix()  # we only take the first two features. We could
+X = two_feature_dataframe.iloc[random_vector[0: training_cut_off-1]].as_matrix()  
 y = np.ravel(new_df.iloc[random_vector[0: training_cut_off-1]].as_matrix())
 h = 0.1
 

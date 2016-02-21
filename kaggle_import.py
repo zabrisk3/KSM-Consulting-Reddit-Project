@@ -1,6 +1,6 @@
 import pandas as pd
 import sqlite3
-"""Note: this Python code was run through Kaggle's website.It imports specific parts from the Reddit May 2015 data
+"""Note: this Python code was run through Kaggle's website. It imports specific parts from the Reddit May 2015 data
 and then saves it.
 
 """
