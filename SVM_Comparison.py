@@ -92,9 +92,9 @@ print(accuracy_df)
 t_test_df=pd.DataFrame({ "": pd.Series([accuracy_df['1. SVM Method'][j] for j in accuracy_df.index])})
 
 for z in range(len(accuracy_df['1. SVM Method'])):
-    df2=pd.DataFrame({ accuracy_df['1. SVM Method'][z]: [2*(10**(-100000)) for k in accuracy_df.index] })
+    df2=pd.DataFrame({ accuracy_df['1. SVM Method'][z]: [0.0 for k in accuracy_df.index] })
     t_test_df=pd.concat([t_test_df, df2], axis=1)
-print(t_test_df)
+
 for m in accuracy_df.index:
     for i in range(m+1,len(accuracy_df.index)):
         mean1 = accuracy_df['2. Average Accuracy'][m]
