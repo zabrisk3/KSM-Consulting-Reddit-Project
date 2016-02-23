@@ -99,8 +99,8 @@ for m in accuracy_df.index:
     for i in range(m+1,len(accuracy_df.index)):
         mean1 = accuracy_df['2. Average Accuracy'][m]
         mean2 = accuracy_df['2. Average Accuracy'][i]
-        N1= 10000
-        N2= 10000
+        N1= n
+        N2= n
         sample_std1=accuracy_df['3. Accuracy Standard Deviation'][m]
         sample_variance1=(sample_std1)**2
         sample_std2=accuracy_df['3. Accuracy Standard Deviation'][i]
