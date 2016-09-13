@@ -1,3 +1,5 @@
+# Reddit SVM Classification Data Mining Project
+
 **Note, Python scripts were run in Python 3. 
 
 Posts of similar themes can be found in many different subreddits on Reddit’s website. One can, for example, find Star Wars-themed posts in a variety of subreddits, some of which are Star Wars-specific, some of which are not. With this in mind, the question arises of whether or not it is possible to determine the specific subreddit of a post, given the content of the post itself.  Such classification would have multiple useful applications for Reddit and other companies. 
